@@ -1,0 +1,4 @@
+#.gitignore을 add하기 전에 add한 것은 rm으로 지워줘야함 
+__pycache__
+db.sqlite3
+.vscode

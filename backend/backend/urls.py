@@ -20,7 +20,13 @@ from django.conf import settings
 
 # from django.conf.urls import static
 
-urlpatterns = [path("admin/", admin.site.urls), path("", include("instagram.urls"))]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path(
+        "accounts/", include("accounts.urls")
+    ),  # 이 말은 accounts의 주소로 오는 것은 accounts.urls와 합치겠다라는 말? 모든 요청을 보내겠다는게 아니다?
+    path("", include("instagram.urls")),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

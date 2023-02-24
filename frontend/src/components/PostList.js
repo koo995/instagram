@@ -22,7 +22,6 @@ function PostList() {
   }, []);
   return (
     <div>
-      <h1>PostList</h1>
       {/* postList에서 꺼내온 녀석은 object이니까 render가 안된다? JSON.stringify을 이용한다 */}
       {postList.map((post) => {
         // 중괄호이기 때문에 return이 있어야 한다?? 아니면 그냥 한줄로 붙여서 쓰거나

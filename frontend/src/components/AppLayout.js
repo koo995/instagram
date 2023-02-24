@@ -3,20 +3,23 @@ import "./AppLayout.scss";
 import { Input, Menu } from "antd";
 import StoryList from "./StoryList";
 import SuggestionList from "./SuggestionList";
+import LogoImage from "assets/logo.png";
+
 const { Search } = Input;
 
 function AppLayout({ children }) {
   return (
     <div className="app">
       <div className="header">
-        <h1 className="page-title">instagram</h1>
+        <h1 className="page-title">
+          <img src={LogoImage} alt="instagram" />
+        </h1>
         <div className="search">
           {/* 이렇게 하면 search의 길이가 줄어지네? */}
           <Search
             placeholder="검색어를 입력해 주세요"
-            allowClear
-            enterButton="Search"
-            size="large"
+            style={{ width: 200 }}
+            size="small"
           />
         </div>
         <div className="topnav">
@@ -36,7 +39,7 @@ function AppLayout({ children }) {
         <StoryList style={{ marginBottom: "1rem" }} />
         <SuggestionList style={{ marginBottom: "1rem" }} />
       </div>
-      <div className="footer">footer</div>
+      <div className="footer">&copy; 2023. gunhong.</div>
     </div>
   );
 }

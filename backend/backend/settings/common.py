@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     # local apps
     "instagram",
     "accounts",
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -141,5 +144,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+}
+
+SIMPLE_JWT = {
+    "SIGNING_KEY": SECRET_KEY,  # FIXME: 장고의 시크릿키와 다른것을 해주는 것이 좋다 JWT_SECRET_KEY
+    "ALGORITHM": "HS256",
+    "ROTATE_REFRESH_TOKENS": True,
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=28),
 }

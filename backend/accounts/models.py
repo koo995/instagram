@@ -21,6 +21,6 @@ class User(AbstractUser): #이것으로 모델을 바꿧는데 admin페이지에
     avatar = models.ImageField(blank=True, upload_to="accounts/avatar/%Y/%m/%d")
     
     @property
-    def name(self):
+    def name(self): #name이란 것은 커스텀 속성
         return f"{self.first_name} {self.last_name}"
     

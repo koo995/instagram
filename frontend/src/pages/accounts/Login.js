@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import { Card, Button, Form, Input, notification } from "antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Axios from "axios";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import useLocalStorage from "utils/useLocalStorage";
+import { useAppContext } from "store";
+import { setToken } from "store";
 
 export default function Login() {
+  const { dispatch } = useAppContext();
+  const location = useLocation(); //이 부분이 바로 쓰이는걸 잘 모르겠는데...
   const history = useHistory();
-  const [jwtAccessToken, setJwtAccessToken] = useLocalStorage(
-    "jwtAccessToken",
-    ""
-  );
 
-  console.log("loaded Token: ", jwtAccessToken); // 왜 이게 두번이나 출력되는 것이지?
+  const { from: loginRedirectUrl } = location.state || {
+    from: { pathname: "/" },
+  };
+
+  console.log("location.state:", location.state);
+  // const [jwtAccessToken, setJwtAccessToken] = useLocalStorage(
+  //   "jwtAccessToken",
+  //   ""
+  // );
 
   const onFinish = (values) => {
     async function fn() {
@@ -31,13 +39,16 @@ export default function Login() {
         const {
           data: { access: jwtAccessToken },
         } = response;
-        setJwtAccessToken(jwtAccessToken);
+
+        dispatch(setToken(jwtAccessToken));
+        //밑에 방법 대신에 dispatch을 활용한다.
+        // setJwtAccessToken(jwtAccessToken);
 
         notification.open({
           message: "로그인 성공!",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,
         });
-        // history.push("/accounts/login"); //TODO: 이동주소
+        history.push(loginRedirectUrl); //TODO: 이동주소
       } catch (error) {
         console.log(error);
 

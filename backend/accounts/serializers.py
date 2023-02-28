@@ -19,3 +19,14 @@ class SignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["pk", "username", "password"]  # 이 password을 그대로 저장하면 안된다!!
+
+
+class SuggestionUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "name",
+            "avatar",
+            "my_post_set",
+        ]  # my_post_set이것은 Post모델에서 정의한 관계로 얻어옴

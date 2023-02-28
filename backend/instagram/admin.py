@@ -9,7 +9,7 @@ from .models import Post, Comment, Tag
 # 위에 방식으로 해도 되지만 이렇게 하면 좀더 커스텀하기에 좋다
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["photo_tag", "caption"]
+    list_display = ["photo_tag", "caption", "author"]
     list_display_links = ["caption"]  # 캡션에 링크를 만든다
 
     # 모델에 함수를 만들어도 되고 어드민에 함수를 만들어도 된다.

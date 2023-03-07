@@ -7,7 +7,7 @@ import LogoImage from "assets/logo.png";
 
 const { Search } = Input;
 
-function AppLayout({ children }) {
+function AppLayout({ children, sidebar }) {
   return (
     <div className="app">
       <div className="header">
@@ -35,10 +35,7 @@ function AppLayout({ children }) {
         </div>
       </div>
       <div className="contents">{children}</div>
-      <div className="sidebar">
-        <StoryList style={{ marginBottom: "1rem" }} />
-        <SuggestionList style={{ marginBottom: "1rem" }} />
-      </div>
+      <div className="sidebar">{sidebar}</div>
       <div className="footer">&copy; 2023. gunhong.</div>
     </div>
   );
